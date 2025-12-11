@@ -120,7 +120,7 @@ const ProductDetail = () => {
                             to="/contact" 
                             className="px-8 py-3 bg-white text-wood-dark hover:bg-white/90 transition-all duration-300 uppercase tracking-widest text-sm font-medium"
                         >
-                            Tư Vấn Ngay
+                            Liên Hệ Ngay
                         </Link>
                     </div>
                 </div>

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #4A3B32;
+    color: #F5F5F0;
+    font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+
+@layer utilities {
+    .animate-subtle-zoom {
+        animation: subtleZoom 20s infinite alternate linear;
+    }
+}
+
+@keyframes subtleZoom {
+    0% { transform: scale(1.05); }
+    100% { transform: scale(1.15); }
+}

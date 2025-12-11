@@ -18,7 +18,7 @@ const ProductDetail = () => {
         return (
             <div className="min-h-screen bg-wood-dark flex items-center justify-center text-white">
                 <div className="text-center">
-                    <h2 className="text-2xl font-serif mb-4">Tác phẩm không tồn tại</h2>
+                    <h2 className="text-2xl font-serif mb-4">Cổ đồ không tồn tại</h2>
                     <Link to="/collection" className="text-white/50 hover:text-white border-b border-white/50 transition-colors">
                         Trở về Bộ Sưu Tập
                     </Link>
@@ -68,7 +68,7 @@ const ProductDetail = () => {
                     <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 pt-8">
                         <div>
                             <h3 className="text-lg font-serif text-white mb-6 uppercase tracking-widest border-l-2 border-white/30 pl-4">
-                                Thông Tin Tác Phẩm
+                                Thông Tin Cổ Đồ
                             </h3>
                             <ul className="space-y-4 text-white/70 font-light">
                                 <li className="flex justify-between items-end border-b border-dashed border-white/10 pb-2">
@@ -95,7 +95,7 @@ const ProductDetail = () => {
                 {/* Video / Gallery Section */}
                 <div className="mb-24">
                     <h3 className="text-xl font-serif text-white mb-8 border-b border-white/10 pb-4 inline-block pr-12">
-                        Góc Nhìn Tác Phẩm
+                        Góc Nhìn Cổ Đồ
                     </h3>
                     
                     {/* Video */}

@@ -170,7 +170,9 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                                     top: lensPos.y - 125,
                                     width: '250px',
                                     height: '250px',
-                                    backgroundImage: `url(${currentSrc})`,
+                                    backgroundImage: `url("${currentSrc}")`,
+                                    backgroundColor: 'black', // Fallback
+                                    backgroundRepeat: 'no-repeat',
                                     backgroundSize: `${imgDim.w * 2.5}px ${imgDim.h * 2.5}px`, // Zoom x2.5
                                     backgroundPosition: `${bgPos.x}px ${bgPos.y}px`
                                 }}

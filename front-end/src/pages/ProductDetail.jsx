@@ -33,73 +33,92 @@ const ProductDetail = () => {
     };
 
     return (
-        <div className="bg-wood-dark min-h-screen text-cream pb-32">
-            {/* Hero Image */}
-            <div className="relative h-[70vh] w-full overflow-hidden">
-                <img 
-                    src={`${import.meta.env.BASE_URL}${product.image}`}
-                    alt={product.title}
-                    className="w-full h-full object-cover animate-subtle-zoom opacity-80"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-wood-dark via-transparent to-black/30"></div>
-                
-                <div className="absolute bottom-0 left-0 w-full p-8 md:p-16">
-                    <div className="container mx-auto">
-                        <Link to="/collection" className="inline-flex items-center text-white/60 hover:text-white mb-6 transition-colors tracking-widest text-xs uppercase group">
-                            <span className="mr-2 group-hover:-translate-x-1 transition-transform">←</span> Bộ Sưu Tập
-                        </Link>
-                        <h1 className="text-5xl md:text-7xl font-serif text-white mb-4 leading-tight">
+        <div className="bg-wood-dark min-h-screen text-cream pb-32 pt-24 md:pt-32">
+            <div className="container mx-auto px-6 md:px-16 max-w-7xl">
+                <Link to="/collection" className="inline-flex items-center text-white/50 hover:text-white mb-8 transition-colors tracking-widest text-xs uppercase group">
+                    <span className="mr-2 group-hover:-translate-x-1 transition-transform">←</span> Quay lại Bộ Sưu Tập
+                </Link>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 mb-24 items-start">
+                    {/* Left Column: Main Image */}
+                    <div className="sticky top-24">
+                        <div className="aspect-[4/5] w-full overflow-hidden rounded-sm shadow-2xl relative group">
+                            <img 
+                                src={`${import.meta.env.BASE_URL}${product.image}`}
+                                alt={product.title}
+                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 ring-1 ring-white/10 pointer-events-none"></div>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Content */}
+                    <div>
+                        <h1 className="text-4xl md:text-6xl font-serif text-white mb-8 leading-tight">
                             {product.title}
                         </h1>
-                    </div>
-                </div>
-            </div>
 
-            <div className="container mx-auto px-6 md:px-16 mt-16 max-w-5xl">
-                {/* Story Section */}
-                <div className="mb-24 text-center md:text-left">
-                    <p className="text-2xl md:text-3xl font-serif text-white/90 italic leading-relaxed mb-12 border-l-4 border-white/20 pl-6 md:pl-10 py-2">
-                        "{product.story}"
-                    </p>
-                    <div className="prose prose-invert prose-lg max-w-none font-light text-white/80 leading-loose text-justify md:text-left">
-                        <p>{product.description}</p>
-                    </div>
+                        <div className="mb-12">
+                            <p className="text-xl md:text-2xl font-serif text-white/90 italic leading-relaxed mb-8 border-l-4 border-white/20 pl-6 py-2">
+                                "{product.story}"
+                            </p>
+                            <div className="prose prose-invert prose-lg max-w-none font-light text-white/80 leading-loose text-justify">
+                                <p>{product.description}</p>
+                            </div>
+                        </div>
 
-                    <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 pt-8">
-                        <div>
-                            <h3 className="text-lg font-serif text-white mb-6 uppercase tracking-widest border-l-2 border-white/30 pl-4">
+                        {/* Specs Table */}
+                        <div className="border-t border-white/10 pt-8 mb-12">
+                            <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-widest">
                                 Thông Tin Cổ Đồ
                             </h3>
-                            <ul className="space-y-4 text-white/70 font-light">
-                                <li className="flex justify-between items-end border-b border-dashed border-white/10 pb-2">
-                                    <span className="text-sm uppercase tracking-wider text-white/40">Chất liệu</span>
-                                    <span className="text-white text-right">{product.material}</span>
+                            <ul className="space-y-4 text-white/70 font-light text-sm">
+                                <li className="grid grid-cols-3 border-b border-dashed border-white/10 pb-2">
+                                    <span className="uppercase tracking-wider text-white/40">Chất liệu</span>
+                                    <span className="col-span-2 text-white">{product.material}</span>
                                 </li>
-                                <li className="flex justify-between items-end border-b border-dashed border-white/10 pb-2">
-                                    <span className="text-sm uppercase tracking-wider text-white/40">Kích thước</span>
-                                    <span className="text-white text-right">{product.dimensions}</span>
+                                <li className="grid grid-cols-3 border-b border-dashed border-white/10 pb-2">
+                                    <span className="uppercase tracking-wider text-white/40">Kích thước</span>
+                                    <span className="col-span-2 text-white">{product.dimensions}</span>
                                 </li>
-                                <li className="flex justify-between items-end border-b border-dashed border-white/10 pb-2">
-                                    <span className="text-sm uppercase tracking-wider text-white/40">Trọng lượng</span>
-                                    <span className="text-white text-right">{product.weight}</span>
+                                <li className="grid grid-cols-3 border-b border-dashed border-white/10 pb-2">
+                                    <span className="uppercase tracking-wider text-white/40">Trọng lượng</span>
+                                    <span className="col-span-2 text-white">{product.weight}</span>
                                 </li>
-                                <li className="flex justify-between items-end border-b border-dashed border-white/10 pb-2">
-                                    <span className="text-sm uppercase tracking-wider text-white/40">Nghệ nhân / Xuất xứ</span>
-                                    <span className="text-white text-right">{product.origin}</span>
+                                <li className="grid grid-cols-3 border-b border-dashed border-white/10 pb-2">
+                                    <span className="uppercase tracking-wider text-white/40">Xuất xứ</span>
+                                    <span className="col-span-2 text-white">{product.origin}</span>
                                 </li>
                             </ul>
+                        </div>
+
+                        {/* CTA Buttons */}
+                        <div className="flex flex-wrap gap-4 pt-4">
+                            <Link 
+                                to="/contact" 
+                                className="flex-1 text-center px-8 py-4 bg-white text-wood-dark hover:bg-white/90 transition-all duration-300 uppercase tracking-widest text-sm font-bold"
+                            >
+                                Liên Hệ Ngay
+                            </Link>
+                            <button 
+                                onClick={handleShare}
+                                className="px-8 py-4 border border-white/20 text-white hover:bg-white hover:text-wood-dark transition-all duration-300 uppercase tracking-widest text-sm flex items-center gap-2"
+                            >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+                                Chia sẻ
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 {/* Video / Gallery Section */}
-                <div className="mb-24">
-                    <h3 className="text-xl font-serif text-white mb-8 border-b border-white/10 pb-4 inline-block pr-12">
+                <div className="mb-24 pt-12 border-t border-white/10">
+                    <h3 className="text-xl font-serif text-white mb-12 text-center">
                         Góc Nhìn Cổ Đồ
                     </h3>
                     
                     {/* Video */}
-                    <div className="aspect-video w-full bg-black/40 border border-white/10 flex items-center justify-center relative group overflow-hidden mb-12">
+                    <div className="max-w-4xl mx-auto aspect-video bg-black/40 border border-white/10 flex items-center justify-center relative group overflow-hidden mb-16 shadow-2xl">
                         <iframe 
                             width="100%" 
                             height="100%" 
@@ -127,31 +146,6 @@ const ProductDetail = () => {
                     </div>
                 </div>
 
-                {/* Interactions */}
-                <div className="flex flex-col md:flex-row items-center justify-between border-t border-white/10 pt-12 gap-8">
-                    <div className="text-center md:text-left">
-                        <p className="text-white/40 text-sm tracking-widest uppercase mb-2">Liên hệ sở hữu</p>
-                        <p className="text-xl text-white">090 123 4567</p>
-                    </div>
-                    
-                    <div className="flex gap-6">
-                        <button 
-                            onClick={handleShare}
-                            className="px-8 py-3 border border-white/20 text-white hover:bg-white hover:text-wood-dark transition-all duration-300 uppercase tracking-widest text-sm flex items-center gap-2"
-                        >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
-                            Chia sẻ
-                        </button>
-                        <Link 
-                            to="/contact" 
-                            className="px-8 py-3 bg-white text-wood-dark hover:bg-white/90 transition-all duration-300 uppercase tracking-widest text-sm font-medium"
-                        >
-                            Liên Hệ Ngay
-                        </Link>
-                    </div>
-                </div>
-                </div>
-
                 <div className="mt-24 text-center">
                     <Link 
                         to="/collection"
@@ -161,6 +155,7 @@ const ProductDetail = () => {
                     </Link>
                 </div>
 
+            </div>
         </div>
     );
 };

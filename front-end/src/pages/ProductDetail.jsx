@@ -48,7 +48,7 @@ const ProductDetail = () => {
                             <LightboxImage 
                                 src={`${import.meta.env.BASE_URL}${product.image}`}
                                 alt={product.title}
-                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                className="w-full h-full object-cover transition-transform duration-1000 md:group-hover:scale-105"
                             />
                             <div className="absolute inset-0 ring-1 ring-white/10 pointer-events-none"></div>
                         </div>

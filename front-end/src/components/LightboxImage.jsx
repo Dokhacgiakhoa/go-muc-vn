@@ -45,20 +45,39 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
         if (e.pointerType !== 'mouse') return;
         
         const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+        const { naturalWidth, naturalHeight } = e.currentTarget;
+        
         const x = e.clientX - left;
         const y = e.clientY - top;
 
-        setLensPos({ x: e.clientX, y: e.clientY });
-        // Zoom Factor
-        const ZOOM = 2.5;
+        // Calculate rendered dimensions (object-fit: contain logic)
+        const imageRatio = naturalWidth / naturalHeight;
+        const containerRatio = width / height;
         
-        // Calculate background position to align the point under cursor with center of lens
-        // Formula: LensCenter - (CursorPos * ZoomLevel)
+        let renderedWidth, renderedHeight, offsetX, offsetY;
+
+        if (containerRatio > imageRatio) {
+            // Container is wider -> Height is full, Width is scaled
+            renderedHeight = height;
+            renderedWidth = height * imageRatio;
+            offsetX = (width - renderedWidth) / 2;
+            offsetY = 0;
+        } else {
+            // Container is taller -> Width is full, Height is scaled
+            renderedWidth = width;
+            renderedHeight = width / imageRatio;
+            offsetX = 0;
+            offsetY = (height - renderedHeight) / 2;
+        }
+
+        const ZOOM = 2.5;
+
+        setLensPos({ x: e.clientX, y: e.clientY });
+        setImgDim({ w: renderedWidth, h: renderedHeight });
         setBgPos({
-            x: 125 - x * ZOOM,
-            y: 125 - y * ZOOM
+            x: 125 - (x - offsetX) * ZOOM,
+            y: 125 - (y - offsetY) * ZOOM
         });
-        setImgDim({ w: width, h: height }); 
         setShowLens(true);
     };
 

@@ -134,7 +134,7 @@ const ProductDetail = () => {
                         Quay lại Bộ Sưu Tập
                     </Link>
                 </div>
-            </div>
+
         </div>
     );
 };

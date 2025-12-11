@@ -45,7 +45,7 @@ const Collection = () => {
                             {/* Frame & Spotlight */}
                             <div className="relative aspect-[3/4] overflow-hidden bg-black shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_50px_-12px_rgba(255,255,255,0.1)]">
                                 <img 
-                                    src={item.src} 
+                                    src={`${import.meta.env.BASE_URL}${item.src}`}
                                     alt={item.title} 
                                     className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 grayscale group-hover:grayscale-0"
                                     loading="lazy"

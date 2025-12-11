@@ -12,7 +12,7 @@ const Home = () => {
             <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img 
-                        src="/z7309801553298_21e97b68f9fc256c4425a4b54df6d536.jpg" 
+                        src={`${import.meta.env.BASE_URL}z7309801553298_21e97b68f9fc256c4425a4b54df6d536.jpg`} 
                         alt="Gỗ Mục Gallery" 
                         className="w-full h-full object-cover opacity-60 scale-105 animate-subtle-zoom"
                     />
@@ -57,7 +57,7 @@ const Home = () => {
                     <div className="w-full md:w-1/2">
                         <div className="aspect-[4/5] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-1000">
                             <img 
-                                src="/z7309801590555_abd5a5d680eb8850ad869024322c970c.jpg" 
+                                src={`${import.meta.env.BASE_URL}z7309801590555_abd5a5d680eb8850ad869024322c970c.jpg`} 
                                 alt="Artisan Work" 
                                 className="w-full h-full object-cover"
                             />

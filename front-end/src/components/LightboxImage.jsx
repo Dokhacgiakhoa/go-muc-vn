@@ -9,6 +9,7 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
     const [showLens, setShowLens] = useState(false);
     const [lensPos, setLensPos] = useState({ x: 0, y: 0 });
     const [bgPos, setBgPos] = useState({ x: 0, y: 0 });
+    const [imgDim, setImgDim] = useState({ w: 0, h: 0 }); // New state for image dimensions
 
     // Mobile Pinch/Zoom State
     const [scale, setScale] = useState(1);
@@ -40,18 +41,19 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
     }, [isOpen, src, gallery]);
 
     // Desktop: Lens Effect
-    const handleMouseMove = (e) => {
-        if (isTouchDevice) return; 
+    const handlePointerMove = (e) => {
+        if (e.pointerType !== 'mouse') return;
         
         const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - left;
         const y = e.clientY - top;
 
-        setLensPos({ x, y });
+        setLensPos({ x: e.clientX, y: e.clientY });
         setBgPos({
             x: (x / width) * 100,
             y: (y / height) * 100
         });
+        setImgDim({ w: width, h: height }); // Store image dimensions
         setShowLens(true);
     };
 
@@ -73,17 +75,8 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                 e.touches[0].pageY - e.touches[1].pageY
             );
             if (startDist > 0) {
-                const newScale = Math.min(Math.max(1, scale * (dist / startDist)), 4); // Limit scale 1x to 4x
+                const newScale = Math.min(Math.max(1, scale * (dist / startDist)), 4);
                 setScale(newScale);
-                // Note: Real pinch zoom often updates 'startDist' or uses delta. 
-                // Alternatively, simply setScale(prev => Math.min(4, Math.max(1, prev + delta)))
-                // For simplicity here: we might act funky if not careful. 
-                // Let's stick to a simpler logic: dist > startDist -> zoom in.
-                
-                // Better approach for simple pinch without glitches:
-                // We barely track startDist for the *gesture*, but we need to track *base scale*.
-                // Keep it simple: this is "good enough" for basic demo, or use a library recommended. 
-                // Just relying on user provided feedback: "zoom bằng 2 ngón tay".
             }
         }
     };
@@ -128,8 +121,6 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                     {/* Main Image Container */}
                     <div 
                         className="relative w-full h-full flex items-center justify-center p-4 md:p-12 overflow-hidden"
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={() => setShowLens(false)}
                         onTouchStart={handleTouchStart}
                         onTouchMove={handleTouchMove}
                     >
@@ -139,24 +130,24 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                             className="transition-transform duration-200 select-none shadow-2xl max-w-full max-h-full object-contain"
                             style={{ 
                                 transform: `scale(${scale})`,
-                                cursor: isTouchDevice ? 'default' : (showLens ? 'none' : 'crosshair') // Hide cursor when lens is active
+                                cursor: isTouchDevice ? 'default' : (showLens ? 'none' : 'crosshair')
                             }}
-                            onClick={(e) => e.stopPropagation()} // Click does nothing on image to zoom, just stops propagation
+                            onPointerMove={handlePointerMove}
+                            onPointerLeave={() => setShowLens(false)}
+                            onClick={(e) => e.stopPropagation()}
                         />
 
                         {/* Lens Zoom (Desktop Only) */}
                         {!isTouchDevice && showLens && (
                             <div 
-                                className="absolute pointer-events-none border border-white/20 rounded-full shadow-2xl z-50 bg-no-repeat bg-white/5"
+                                className="fixed pointer-events-none border border-white/20 rounded-full shadow-2xl z-50 bg-no-repeat bg-white/5"
                                 style={{
-                                    left: lensPos.x - 125, // Lens size 250px
+                                    left: lensPos.x - 125,
                                     top: lensPos.y - 125,
                                     width: '250px',
                                     height: '250px',
                                     backgroundImage: `url(${currentSrc})`,
-                                    backgroundSize: `${250 * scale}%`, // Allows base scale influence or fixed
-                                    // Actually for lens zoom, we want fixed high zoom.
-                                    backgroundSize: '300%', // Fixed 3x zoom for lens
+                                    backgroundSize: `${imgDim.w * 2}px ${imgDim.h * 2}px`, // Zoom x2 relative to rendered size
                                     backgroundPosition: `${bgPos.x}% ${bgPos.y}%`
                                 }}
                             ></div>

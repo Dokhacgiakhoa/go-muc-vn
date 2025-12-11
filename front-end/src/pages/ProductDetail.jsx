@@ -41,7 +41,7 @@ const ProductDetail = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 mb-24 items-start">
                     {/* Left Column: Main Image */}
-                    <div className="sticky top-24">
+                    <div className="md:sticky md:top-24">
                         <div className="aspect-[4/5] w-full overflow-hidden rounded-sm shadow-2xl relative group">
                             <img 
                                 src={`${import.meta.env.BASE_URL}${product.image}`}

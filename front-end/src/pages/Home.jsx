@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Home = () => {
     useEffect(() => {
         document.title = "Gỗ Mục - Trang Chủ | Nghệ Thuật Gỗ Độc Bản";
     }, []);
+
+    const [activeImage, setActiveImage] = useState(false);
 
     return (
         <div className="bg-wood-dark min-h-screen">
@@ -55,13 +57,27 @@ const Home = () => {
             <section className="py-20 md:py-32 px-6 container mx-auto">
                 <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16 max-w-6xl mx-auto">
                     <div className="w-full md:w-1/2">
-                        <div className="aspect-[4/5] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-1000">
+                        <div 
+                            className={`aspect-[4/5] overflow-hidden relative transition-all duration-1000 cursor-pointer ${activeImage ? 'grayscale-0' : 'grayscale hover:grayscale-0'}`}
+                            onClick={() => setActiveImage(!activeImage)}
+                        >
                             <img 
                                 src={`${import.meta.env.BASE_URL}z7309801590555_abd5a5d680eb8850ad869024322c970c.jpg`} 
                                 alt="Artisan Work" 
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 ring-1 ring-white/10 m-4"></div>
+                            
+                            {/* Mobile Interaction: Detail Button */}
+                            <div className={`absolute bottom-8 right-8 transition-opacity duration-500 ${activeImage ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                                <Link 
+                                    to="/collection"
+                                    className="px-6 py-2 bg-white text-wood-dark uppercase tracking-widest text-xs font-bold shadow-lg flex items-center gap-2"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    Chi tiết cổ đồ <span className="text-lg">→</span>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                     <div className="w-full md:w-1/2 text-center md:text-left">

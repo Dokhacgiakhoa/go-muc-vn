@@ -177,10 +177,10 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                                     backgroundPosition: `${bgPos.x}px ${bgPos.y}px`
                                 }}
                             >
-                                {/* Convex Glass Effects */}
-                                <div className="absolute inset-0 rounded-full shadow-[inset_0_0_40px_rgba(0,0,0,0.6)] z-10"></div>
-                                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 via-transparent to-black/20 z-20 opacity-80"></div>
-                                <div className="absolute top-4 left-6 w-24 h-12 bg-white/40 blur-xl rounded-[100%] -rotate-12 z-30 opacity-60"></div>
+                                {/* Convex Glass Effects - Subtle to keep image clear */}
+                                <div className="absolute inset-0 rounded-full shadow-[inset_0_0_40px_rgba(0,0,0,0.4)] z-10"></div>
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 via-transparent to-black/10 z-20 opacity-50"></div>
+                                <div className="absolute top-4 left-6 w-24 h-12 bg-white/30 blur-xl rounded-[100%] -rotate-12 z-30 opacity-50"></div>
                             </div>
                         )}
                         

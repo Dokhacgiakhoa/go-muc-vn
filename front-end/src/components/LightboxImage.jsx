@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], initialIndex = 0 }) => {
@@ -9,11 +9,12 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
     const [showLens, setShowLens] = useState(false);
     const [lensPos, setLensPos] = useState({ x: 0, y: 0 });
     const [bgPos, setBgPos] = useState({ x: 0, y: 0 });
-    const [imgDim, setImgDim] = useState({ w: 0, h: 0 }); // New state for image dimensions
+    const [imgDim, setImgDim] = useState({ w: 0, h: 0 }); 
 
     // Mobile Pinch/Zoom State
     const [scale, setScale] = useState(1);
     const [startDist, setStartDist] = useState(0);
+    const startScale = useRef(1); // Store scale at start of pinch
 
     // Use current image from gallery if available
     const currentSrc = gallery.length > 0 ? gallery[currentIndex] : src;
@@ -89,18 +90,24 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                 e.touches[0].pageY - e.touches[1].pageY
             );
             setStartDist(dist);
+            startScale.current = scale;
         }
     };
 
     const handleTouchMove = (e) => {
         if (e.touches.length === 2) {
+            e.preventDefault(); // Stop browser zoom
+            e.stopPropagation(); // Stop propagation
+            
             const dist = Math.hypot(
                 e.touches[0].pageX - e.touches[1].pageX,
                 e.touches[0].pageY - e.touches[1].pageY
             );
+            
             if (startDist > 0) {
-                const newScale = Math.min(Math.max(1, scale * (dist / startDist)), 4);
-                setScale(newScale);
+                // Calculate new scale relative to startScale
+                const newScale = startScale.current * (dist / startDist);
+                setScale(Math.min(Math.max(1, newScale), 4));
             }
         }
     };
@@ -145,6 +152,7 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                     {/* Main Image Container */}
                     <div 
                         className="relative w-full h-full flex items-center justify-center p-4 md:p-12 pb-24 md:pb-32 overflow-hidden"
+                        style={{ touchAction: 'none' }}
                         onTouchStart={handleTouchStart}
                         onTouchMove={handleTouchMove}
                     >

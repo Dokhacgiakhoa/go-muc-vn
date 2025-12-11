@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import products from '../data/products';
+import LightboxImage from '../components/LightboxImage';
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -43,7 +44,7 @@ const ProductDetail = () => {
                     {/* Left Column: Main Image */}
                     <div className="md:sticky md:top-24">
                         <div className="aspect-[4/5] w-full overflow-hidden rounded-sm shadow-2xl relative group">
-                            <img 
+                            <LightboxImage 
                                 src={`${import.meta.env.BASE_URL}${product.image}`}
                                 alt={product.title}
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -135,12 +136,12 @@ const ProductDetail = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {product.gallery && product.gallery.map((img, idx) => (
                             <div key={idx} className="aspect-[4/5] overflow-hidden relative group cursor-zoom-in">
-                                <img 
+                                <LightboxImage 
                                     src={`${import.meta.env.BASE_URL}${img}`}
                                     alt={`${product.title} detail ${idx + 1}`}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
                                 />
-                                <div className="absolute inset-0 ring-1 ring-white/10 group-hover:ring-white/30 transition-all duration-500"></div>
+                                <div className="absolute inset-0 ring-1 ring-white/10 group-hover:ring-white/30 transition-all duration-500 pointer-events-none"></div>
                             </div>
                         ))}
                     </div>

@@ -1,45 +1,33 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import LightboxImage from '../components/LightboxImage';
 
 const Home = () => {
     useEffect(() => {
         document.title = "Gỗ Mục - Trang Chủ | Nghệ Thuật Gỗ Độc Bản";
     }, []);
 
-    const [activeImage, setActiveImage] = useState(false);
-
     return (
         <div className="bg-wood-dark min-h-screen">
-            {/* Fullscreen Lightbox Overlay */}
-            <div 
-                className={`fixed inset-0 z-50 bg-black/95 flex items-center justify-center transition-opacity duration-500 cursor-zoom-out ${activeImage ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-                onClick={() => setActiveImage(false)}
-            >
-                <img 
-                    src={`${import.meta.env.BASE_URL}z7309801590555_abd5a5d680eb8850ad869024322c970c.jpg`} 
-                    alt="Artisan Work Fullscreen" 
-                    className={`max-w-[90vw] max-h-[90vh] object-contain transition-transform duration-700 ${activeImage ? 'scale-100' : 'scale-90'}`}
-                />
-            </div>
-
             {/* Hero / Entrance */}
             <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <img 
-                        src={`${import.meta.env.BASE_URL}z7309801553298_21e97b68f9fc256c4425a4b54df6d536.jpg`} 
-                        alt="Gỗ Mục Gallery" 
+                    <LightboxImage 
+                        src={`${import.meta.env.BASE_URL}z7309801553298_21e97b68f9fc256c4425a4b54df6d536.jpg`}
+                        alt="Gỗ Mục Gallery"
+                        containerClassName="w-full h-full"
                         className="w-full h-full object-cover opacity-60 scale-105 animate-subtle-zoom"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-wood-dark"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-wood-dark pointer-events-none"></div>
                     {/* Spotlight effect */}
-                    <div className="absolute inset-0 bg-radial-gradient from-transparent to-black/80"></div>
+                    <div className="absolute inset-0 bg-radial-gradient from-transparent to-black/80 pointer-events-none"></div>
                 </div>
                 
-                <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+                <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto pointer-events-none">
                     <p className="text-xs md:text-base font-light tracking-[0.3em] uppercase mb-4 text-white/60">
                         Triển lãm nghệ thuật gỗ
                     </p>
-                    <h1 className="text-5xl md:text-8xl font-serif mb-6 md:mb-8 tracking-wider text-white mix-blend-screen opacity-90">
+                    <h1 className="text-5xl md:text-8xl font-serif mb-6 md:mb-8 tracking-wider text-white mix-blend-screen opacity-90 pointer-events-auto">
                         GỖ MỤC
                     </h1>
                     <div className="w-24 h-[1px] bg-white/30 mx-auto mb-8"></div>
@@ -49,7 +37,7 @@ const Home = () => {
                     
                     <Link 
                         to="/collection" 
-                        className="group relative inline-flex items-center gap-4 px-8 py-4 bg-transparent border border-white/20 hover:border-white/50 transition-all duration-500"
+                        className="group relative inline-flex items-center gap-4 px-8 py-4 bg-transparent border border-white/20 hover:border-white/50 transition-all duration-500 pointer-events-auto"
                     >
                         <span className="text-sm tracking-[0.2em] uppercase text-white group-hover:text-white transition-colors">
                             Vào Tham Quan
@@ -59,7 +47,7 @@ const Home = () => {
                 </div>
 
                 {/* Scroll Indicator */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/30 animate-bounce flex flex-col items-center gap-2">
+                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/30 animate-bounce flex flex-col items-center gap-2 pointer-events-none">
                     <span className="text-[10px] tracking-[0.2em] uppercase">Cuộn để khám phá</span>
                     <div className="w-[1px] h-12 bg-gradient-to-b from-white/30 to-transparent"></div>
                 </div>
@@ -69,11 +57,8 @@ const Home = () => {
             <section className="py-20 md:py-32 px-6 container mx-auto">
                 <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16 max-w-6xl mx-auto">
                     <div className="w-full md:w-1/2">
-                        <div 
-                            className="aspect-[4/5] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-1000 cursor-zoom-in"
-                            onClick={() => setActiveImage(true)}
-                        >
-                            <img 
+                        <div className="aspect-[4/5] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-1000">
+                            <LightboxImage 
                                 src={`${import.meta.env.BASE_URL}z7309801590555_abd5a5d680eb8850ad869024322c970c.jpg`} 
                                 alt="Artisan Work" 
                                 className="w-full h-full object-cover"

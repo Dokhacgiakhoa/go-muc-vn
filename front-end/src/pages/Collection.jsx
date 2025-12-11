@@ -1,6 +1,7 @@
 import products from '../data/products';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
+import LightboxImage from '../components/LightboxImage';
 
 const Collection = () => {
     useEffect(() => {
@@ -21,13 +22,12 @@ const Collection = () => {
                         <Link to={`/product/${item.id}`} key={item.id} className={`group relative block ${index % 2 === 0 ? 'md:translate-y-12' : ''}`}>
                             {/* Frame & Spotlight */}
                             <div className="relative aspect-[3/4] overflow-hidden bg-black shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_50px_-12px_rgba(255,255,255,0.1)]">
-                                <img 
+                                <LightboxImage
                                     src={`${import.meta.env.BASE_URL}${item.image}`}
                                     alt={item.title} 
                                     className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 grayscale group-hover:grayscale-0"
-                                    loading="lazy"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none"></div>
                             </div>
 
                             {/* Exhibition Tag */}

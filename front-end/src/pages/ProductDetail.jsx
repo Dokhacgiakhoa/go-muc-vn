@@ -64,6 +64,32 @@ const ProductDetail = () => {
                     <div className="prose prose-invert prose-lg max-w-none font-light text-white/80 leading-loose text-justify md:text-left">
                         <p>{product.description}</p>
                     </div>
+
+                    <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 pt-8">
+                        <div>
+                            <h3 className="text-lg font-serif text-white mb-6 uppercase tracking-widest border-l-2 border-white/30 pl-4">
+                                Thông Tin Tác Phẩm
+                            </h3>
+                            <ul className="space-y-4 text-white/70 font-light">
+                                <li className="flex justify-between items-end border-b border-dashed border-white/10 pb-2">
+                                    <span className="text-sm uppercase tracking-wider text-white/40">Chất liệu</span>
+                                    <span className="text-white text-right">{product.material}</span>
+                                </li>
+                                <li className="flex justify-between items-end border-b border-dashed border-white/10 pb-2">
+                                    <span className="text-sm uppercase tracking-wider text-white/40">Kích thước</span>
+                                    <span className="text-white text-right">{product.dimensions}</span>
+                                </li>
+                                <li className="flex justify-between items-end border-b border-dashed border-white/10 pb-2">
+                                    <span className="text-sm uppercase tracking-wider text-white/40">Trọng lượng</span>
+                                    <span className="text-white text-right">{product.weight}</span>
+                                </li>
+                                <li className="flex justify-between items-end border-b border-dashed border-white/10 pb-2">
+                                    <span className="text-sm uppercase tracking-wider text-white/40">Nghệ nhân / Xuất xứ</span>
+                                    <span className="text-white text-right">{product.origin}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Video / Gallery Section */}

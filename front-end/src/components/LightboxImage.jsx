@@ -125,7 +125,7 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                 >
                     {/* Main Image Container */}
                     <div 
-                        className="relative w-full h-full flex items-center justify-center p-4 md:p-12 overflow-hidden"
+                        className="relative w-full h-full flex items-center justify-center p-4 md:p-12 pb-24 md:pb-32 overflow-hidden"
                         onTouchStart={handleTouchStart}
                         onTouchMove={handleTouchMove}
                     >

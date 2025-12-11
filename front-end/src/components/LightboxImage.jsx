@@ -49,11 +49,14 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
         const y = e.clientY - top;
 
         setLensPos({ x: e.clientX, y: e.clientY });
+        setImgDim({ w: width, h: height });
+        
+        // Calculate background position to align the point under cursor with center of lens
+        // Formula: LensCenter - (CursorPos * ZoomLevel)
         setBgPos({
-            x: (x / width) * 100,
-            y: (y / height) * 100
+            x: 125 - x * 2,
+            y: 125 - y * 2
         });
-        setImgDim({ w: width, h: height }); // Store image dimensions
         setShowLens(true);
     };
 
@@ -148,7 +151,7 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                                     height: '250px',
                                     backgroundImage: `url(${currentSrc})`,
                                     backgroundSize: `${imgDim.w * 2}px ${imgDim.h * 2}px`, // Zoom x2 relative to rendered size
-                                    backgroundPosition: `${bgPos.x}% ${bgPos.y}%`
+                                    backgroundPosition: `${bgPos.x}px ${bgPos.y}px`
                                 }}
                             ></div>
                         )}

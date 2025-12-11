@@ -138,6 +138,7 @@ const ProductDetail = () => {
                             <div key={idx} className="aspect-[4/5] overflow-hidden relative group cursor-zoom-in">
                                 <LightboxImage 
                                     src={`${import.meta.env.BASE_URL}${img}`}
+                                    gallery={product.gallery.map(g => `${import.meta.env.BASE_URL}${g}`)}
                                     alt={`${product.title} detail ${idx + 1}`}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
                                 />

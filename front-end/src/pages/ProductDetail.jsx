@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import products from '../data/products';
 import LightboxImage from '../components/LightboxImage';
+import GalleryGrid from '../components/GalleryGrid';
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -133,19 +134,7 @@ const ProductDetail = () => {
                     </div>
 
                     {/* Image Gallery */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {product.gallery && product.gallery.map((img, idx) => (
-                            <div key={idx} className="aspect-[4/5] overflow-hidden relative group cursor-zoom-in">
-                                <LightboxImage 
-                                    src={`${import.meta.env.BASE_URL}${img}`}
-                                    gallery={product.gallery.map(g => `${import.meta.env.BASE_URL}${g}`)}
-                                    alt={`${product.title} detail ${idx + 1}`}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
-                                />
-                                <div className="absolute inset-0 ring-1 ring-white/10 group-hover:ring-white/30 transition-all duration-500 pointer-events-none"></div>
-                            </div>
-                        ))}
-                    </div>
+                    <GalleryGrid images={product.gallery} title={product.title} />
                 </div>
 
                 <div className="mt-24 text-center">

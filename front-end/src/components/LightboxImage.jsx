@@ -164,7 +164,7 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                         {/* Lens Zoom (Desktop Only) */}
                         {!isTouchDevice && showLens && (
                             <div 
-                                className="fixed pointer-events-none border border-white/20 rounded-full shadow-2xl z-50 bg-no-repeat bg-white/5"
+                                className="fixed pointer-events-none rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50 bg-no-repeat overflow-hidden border border-white/20"
                                 style={{
                                     left: lensPos.x - 125,
                                     top: lensPos.y - 125,
@@ -176,7 +176,12 @@ const LightboxImage = ({ src, alt, className, containerClassName, gallery = [], 
                                     backgroundSize: `${imgDim.w * 2.5}px ${imgDim.h * 2.5}px`, // Zoom x2.5
                                     backgroundPosition: `${bgPos.x}px ${bgPos.y}px`
                                 }}
-                            ></div>
+                            >
+                                {/* Convex Glass Effects */}
+                                <div className="absolute inset-0 rounded-full shadow-[inset_0_0_40px_rgba(0,0,0,0.6)] z-10"></div>
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 via-transparent to-black/20 z-20 opacity-80"></div>
+                                <div className="absolute top-4 left-6 w-24 h-12 bg-white/40 blur-xl rounded-[100%] -rotate-12 z-30 opacity-60"></div>
+                            </div>
                         )}
                         
                         {/* Navigation Buttons */}

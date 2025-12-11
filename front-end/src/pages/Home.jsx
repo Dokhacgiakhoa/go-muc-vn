@@ -9,8 +9,19 @@ const Home = () => {
     const [activeImage, setActiveImage] = useState(false);
 
     return (
-    return (
         <div className="bg-wood-dark min-h-screen">
+            {/* Fullscreen Lightbox Overlay */}
+            <div 
+                className={`fixed inset-0 z-50 bg-black/95 flex items-center justify-center transition-opacity duration-500 cursor-zoom-out ${activeImage ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                onClick={() => setActiveImage(false)}
+            >
+                <img 
+                    src={`${import.meta.env.BASE_URL}z7309801590555_abd5a5d680eb8850ad869024322c970c.jpg`} 
+                    alt="Artisan Work Fullscreen" 
+                    className={`max-w-[90vw] max-h-[90vh] object-contain transition-transform duration-700 ${activeImage ? 'scale-100' : 'scale-90'}`}
+                />
+            </div>
+
             {/* Hero / Entrance */}
             <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
@@ -58,13 +69,16 @@ const Home = () => {
             <section className="py-20 md:py-32 px-6 container mx-auto">
                 <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16 max-w-6xl mx-auto">
                     <div className="w-full md:w-1/2">
-                        <div className="aspect-[4/5] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-1000">
+                        <div 
+                            className="aspect-[4/5] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-1000 cursor-zoom-in"
+                            onClick={() => setActiveImage(true)}
+                        >
                             <img 
                                 src={`${import.meta.env.BASE_URL}z7309801590555_abd5a5d680eb8850ad869024322c970c.jpg`} 
                                 alt="Artisan Work" 
                                 className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 ring-1 ring-white/10 m-4"></div>
+                            <div className="absolute inset-0 ring-1 ring-white/10 m-4 pointer-events-none"></div>
                         </div>
                     </div>
                     <div className="w-full md:w-1/2 text-center md:text-left">
